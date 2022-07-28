@@ -37,7 +37,7 @@ export const dummyArray: Item[] = [
   },
   {
     id: 3,
-    name: faker.commerce.productName(),
+    name: 'MATCH_THIS_VALUE',
     amount: 2,
     price: 15.00,
     description: faker.commerce.productAdjective(),
