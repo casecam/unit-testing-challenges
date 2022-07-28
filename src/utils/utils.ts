@@ -6,5 +6,5 @@ export function getTotalPrice(count: number) {
 }
 
 export function matchObjectAndString(arr: Item[], stringToMatch: string) {
-  return {}
+  return arr.filter(item => item.name === stringToMatch)[0]
 }
