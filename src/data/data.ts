@@ -1,14 +1,5 @@
 import { faker } from '@faker-js/faker'
-
-type Item = {
-  id: number;
-  name: string;
-  amount: number;
-  price: number;
-  description: string;
-  inStock: boolean;
-}
-
+import { Item } from './types'
 
 export function getRandomItems(count: number) {
   let items: Item[] = []
@@ -26,3 +17,30 @@ function createRandomItem(id: number): Item {
     inStock: true
   }
 }
+
+export const dummyArray: Item[] = [
+  {
+    id: 1,
+    name: faker.commerce.productName(),
+    amount: 2,
+    price: 15.00,
+    description: faker.commerce.productAdjective(),
+    inStock: true
+  },
+  {
+    id: 2,
+    name: 'MATCH_THIS_VALUE',
+    amount: 2,
+    price: 15.00,
+    description: faker.commerce.productAdjective(),
+    inStock: true
+  },
+  {
+    id: 3,
+    name: faker.commerce.productName(),
+    amount: 2,
+    price: 15.00,
+    description: faker.commerce.productAdjective(),
+    inStock: true
+  },
+]
