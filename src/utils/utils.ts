@@ -26,6 +26,6 @@ export function renameObjKeys(count: number) {
   return arr
 }
 
-export function getIfInStock() {
-  return []
+export function getIfInStock(arr: Item[]) {
+  return arr.filter(({ inStock }) => inStock === true)
 }

@@ -45,8 +45,8 @@ describe('unit tests', () => {
   })
 
   // test 4
-  it('takes an array and returns an array only objects in stock', () => {
-    const actual = getIfInStock()
+  it('takes an array and returns an array only with items in stock', () => {
+    const actual = getIfInStock(dummyArray)
     const expected = [
       {
         id: expect.any(Number),
@@ -65,6 +65,6 @@ describe('unit tests', () => {
         inStock: true
       },
     ]
-    expect(expected).toContain(actual)
+    expect(expected).toEqual(expect.arrayContaining(actual))
   })
 })
