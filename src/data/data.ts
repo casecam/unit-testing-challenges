@@ -3,7 +3,7 @@ import { Item } from './types'
 
 export function getRandomItems(count: number) {
   let items: Item[] = []
-  Array.from({ length: count }).forEach((item, index) => items.push(createRandomItem(index)))
+  Array.from({ length: count }).forEach((item, index) => items.push(createRandomItem(index + 1)))
   return items
 }
 
