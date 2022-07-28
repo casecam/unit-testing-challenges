@@ -21,7 +21,7 @@ export function renameObjKeys(count: number) {
         objAmount: amount,
         objPrice: price,
         objDescription: description,
-        ojInStock: inStock
+        objInStock: inStock
   }))
   return arr
 }
