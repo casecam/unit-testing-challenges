@@ -1,9 +1,10 @@
-import { idText } from 'typescript';
 import { getRandomItems } from '../data/data'
 import { Item } from '../data/types'
 
 export function getTotalPrice(count: number) {
-  return getRandomItems(count).reduce((sum, { amount, price }) => sum + price * amount, 0)
+  return getRandomItems(count)
+    .reduce((sum, { amount, price }) => 
+       sum + price * amount, 0)
 }
 
 export function matchObjectAndString(arr: Item[], stringToMatch: string) {
@@ -13,15 +14,16 @@ export function matchObjectAndString(arr: Item[], stringToMatch: string) {
 export function renameObjKeys(count: number) {
   let arr = getRandomItems(count).map(
     (
-      {id, name, amount, price, description, inStock}
+      // this is called aliasing. Just return the new object with the aliased names
+      {id: objId, name: objName, amount: objAmount, price: objPrice, description: objOfDescription, inStock: objInStock}
     ) => (
       { 
-        objId: id,
-        objName: name,
-        objAmount: amount,
-        objPrice: price,
-        objDescription: description,
-        objInStock: inStock
+        objId,
+        objName,
+        objAmount,
+        objPrice,
+        objOfDescription,
+        objInStock
   }))
   return arr
 }
