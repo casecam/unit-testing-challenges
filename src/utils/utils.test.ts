@@ -37,7 +37,7 @@ describe('unit tests', () => {
       objDescription: expect.any(String),
       objInStock: expect.any(Boolean)
     }
-    actual.forEach((item: Item) => {
+    actual.forEach((item) => {
       expect(item).toMatchObject(expected)
     })
   })

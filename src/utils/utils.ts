@@ -1,3 +1,4 @@
+import { idText } from 'typescript';
 import { getRandomItems } from '../data/data'
 import { Item } from '../data/types'
 
@@ -10,5 +11,17 @@ export function matchObjectAndString(arr: Item[], stringToMatch: string) {
 }
 
 export function renameObjKeys(count: number) {
-  return getRandomItems(count)
+  let arr = getRandomItems(count).map(
+    (
+      {id, name, amount, price, description, inStock}
+    ) => (
+      { 
+        objId: id,
+        objName: name,
+        objAmount: amount,
+        objPrice: price,
+        objDescription: description,
+        ojInStock: inStock
+  }))
+  return arr
 }
