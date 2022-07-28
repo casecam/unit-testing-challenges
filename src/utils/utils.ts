@@ -7,7 +7,7 @@ export function getTotalPrice(count: number) {
 }
 
 export function matchObjectAndString(arr: Item[], stringToMatch: string) {
-  return arr.filter(item => item.name === stringToMatch)[0]
+  return arr.filter(({ name }) => name === stringToMatch)[0]
 }
 
 export function renameObjKeys(count: number) {
