@@ -1,7 +1,20 @@
-import { dummyArray } from "../data/data";
 import { getIfInStock, getTotalPrice, matchObjectAndString, renameObjKeys } from "./utils";
+import { dummyArray, MOCK_CHARACTERS } from "../data/data";
+import { fetchCharacters } from "./api-utils";
+
 
 describe('unit tests', () => {
+  beforeEach(() => {
+    // resolve to a promise of an object that has a fn named json which resolves a promise of MOCK_CHARACTERS
+    jest.spyOn(global, 'fetch').mockResolvedValue(
+      Promise.resolve({json: () => Promise.resolve(MOCK_CHARACTERS)}) as Promise<Response>
+    )
+  })
+
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
   // test 1
   it('takes an array of objects & returns sum of all prices', () => {
     const numOfItems = 5
@@ -36,7 +49,7 @@ describe('unit tests', () => {
       objName: expect.any(String),
       objAmount: expect.any(Number),
       objPrice: expect.any(Number),
-      objDescription: expect.any(String),
+      objOfDescription: expect.any(String),
       objInStock: expect.any(Boolean)
     }
     actual.forEach((item) => {
@@ -66,5 +79,28 @@ describe('unit tests', () => {
       },
     ]
     expect(expected).toEqual(expect.arrayContaining(actual))
+  })
+
+  // test 5
+  it('hits the rick and morty api and returns results', async () => {
+    const results = await fetchCharacters()
+    expect(fetch).toHaveBeenCalledWith('https://rickandmortyapi.com/api/character')
+    expect(fetch).toHaveBeenCalledTimes(1)
+    expect(results).toHaveLength(20)
+    expect(results).toEqual(expect.arrayContaining(MOCK_CHARACTERS.results))
+  })
+  
+  // test 5.1
+  it('hits the rick and morty api & throws error', async () => {
+    const errorMsg = 'TERRIBLE_FAILURE'
+    jest.spyOn(global, 'fetch').mockRejectedValueOnce(new Error(errorMsg))
+    try {
+      await fetchCharacters()
+      // prove that the error is thrown and does not reach this expect block
+      expect(true).toBe(false)
+    } catch (error) {
+      const message = (error as Error).message
+      expect(message).toBe(errorMsg) // eslint-disable-line
+    }
   })
 })
