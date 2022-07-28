@@ -25,3 +25,7 @@ export function renameObjKeys(count: number) {
   }))
   return arr
 }
+
+export function getIfInStock() {
+  return []
+}
