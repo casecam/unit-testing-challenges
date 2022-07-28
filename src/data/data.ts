@@ -14,7 +14,7 @@ function createRandomItem(id: number): Item {
     amount: 2,
     price: 15.00,
     description: faker.commerce.productAdjective(),
-    inStock: true
+    inStock: faker.datatype.boolean()
   }
 }
 
@@ -33,7 +33,7 @@ export const dummyArray: Item[] = [
     amount: 2,
     price: 15.00,
     description: faker.commerce.productAdjective(),
-    inStock: true
+    inStock: false
   },
   {
     id: 3,
@@ -42,5 +42,13 @@ export const dummyArray: Item[] = [
     price: 15.00,
     description: faker.commerce.productAdjective(),
     inStock: true
+  },
+  {
+    id: 4,
+    name: 'MATCH_THIS_VALUE',
+    amount: 2,
+    price: 15.00,
+    description: faker.commerce.productAdjective(),
+    inStock: false
   },
 ]
