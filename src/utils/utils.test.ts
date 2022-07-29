@@ -122,6 +122,13 @@ describe('unit tests', () => {
   it('multiplies values in array by four and returns the sum', () => {
     const expected = 24
     const actual = multiplyNumbersInArray([2,4])
-    expect(expected).toEqual(actual)
+    expect(actual).toEqual(expected)
+  })
+
+  // test 8
+  it('tallies up the odd and even numbers in an array', () => {
+    const expected = [2,1]
+    const actual = tallyEvensAndOdds([])
+    expect(actual).toEqual(expect.arrayContaining(expected))
   })
 })
