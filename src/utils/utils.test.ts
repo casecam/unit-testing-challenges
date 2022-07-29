@@ -1,13 +1,16 @@
-import { getIfInStock, getTotalPrice, matchObjectAndString, renameObjKeys } from "./utils";
-import { dummyArray, MOCK_CHARACTERS } from "../data/data";
-import { fetchCharacters } from "./api-utils";
-
+import { getIfInStock, getTotalPrice, matchObjectAndString, renameObjKeys } from "./utils"
+import { dummyArray, MOCK_RM_CHARACTERS, MOCK_SWAPI_CHARACTERS } from "../data/data"
+import { fetchCharacters, fetchSwapi } from "./api-utils"
+import mockAxios from 'axios'
 
 describe('unit tests', () => {
   beforeEach(() => {
-    // resolve to a promise of an object that has a fn named json which resolves a promise of MOCK_CHARACTERS
+    // resolve to a promise of an object that has a fn named json which resolves a promise of MOCK_RM_CHARACTERS
     jest.spyOn(global, 'fetch').mockResolvedValue(
-      Promise.resolve({json: () => Promise.resolve(MOCK_CHARACTERS)}) as Promise<Response>
+      Promise.resolve({json: () => Promise.resolve(MOCK_RM_CHARACTERS)}) as Promise<Response>
+      )
+      jest.spyOn(mockAxios, 'get').mockResolvedValue(
+        Promise.resolve({json: () => Promise.resolve(MOCK_SWAPI_CHARACTERS)}) as Promise<Response>
     )
   })
 
@@ -87,7 +90,7 @@ describe('unit tests', () => {
     expect(fetch).toHaveBeenCalledWith('https://rickandmortyapi.com/api/character')
     expect(fetch).toHaveBeenCalledTimes(1)
     expect(results).toHaveLength(20)
-    expect(results).toEqual(expect.arrayContaining(MOCK_CHARACTERS.results))
+    expect(results).toEqual(expect.arrayContaining(MOCK_RM_CHARACTERS.results))
   })
   
   // test 5.1
@@ -102,5 +105,17 @@ describe('unit tests', () => {
       const message = (error as Error).message
       expect(message).toBe(errorMsg) // eslint-disable-line
     }
+  })
+  
+  // test 6
+
+  it('Hits the SWAPI API using axios and returns results', async () => {
+    const results = await fetchSwapi()
+    console.log(results);
+    
+    expect(mockAxios).toHaveBeenCalledWith('https://swapi.dev/api/people/')
+    expect(mockAxios).toHaveBeenCalledTimes(1)
+    expect(results).toHaveLength(20)
+    expect(results).toEqual(expect.arrayContaining(MOCK_SWAPI_CHARACTERS.results))
   })
 })
