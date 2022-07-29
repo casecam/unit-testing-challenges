@@ -1,4 +1,3 @@
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import { getRandomItems } from '../data/data'
 import { Item } from '../data/types'
 
@@ -45,15 +44,18 @@ export function tallyEvensAndOdds(arr: number[]) {
   return { evens: results, odds: arr.length - results }
 }
 
-export function changeKeysToUpper(obj: { evens: number, odds: number }) {
-  return Object.keys(obj).reduce((acc, current) => {
-    acc[current.toUpperCase()] = obj[current] 
+interface IChangeKeysObj { evens: number, odds: number }
+
+export function changeKeysToUpper(obj: IChangeKeysObj) {
+  return Object.keys(obj).reduce<Partial<IChangeKeysObj>>((acc, current) => {
+    (acc[current.toUpperCase() as keyof IChangeKeysObj] as unknown) = 
+      obj[current as keyof IChangeKeysObj] 
     return acc
   }, {})
 }
 
 export function cleanNullValues(obj: {}) {
-  Object.keys(obj).forEach(key => {
+  (Object.keys(obj) as (keyof typeof obj)[]).forEach(key => {
     if(obj[key] === null) delete obj[key] 
   })
   return obj
