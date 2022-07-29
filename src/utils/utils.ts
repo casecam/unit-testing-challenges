@@ -1,5 +1,5 @@
 import { getRandomItems } from '../data/data'
-import { Item } from '../data/types'
+import { IChangeKeysObj, Item } from '../data/types'
 
 export function getTotalPrice(count: number) {
   return getRandomItems(count)
@@ -43,8 +43,6 @@ export function tallyEvensAndOdds(arr: number[]) {
   },0)
   return { evens: results, odds: arr.length - results }
 }
-
-interface IChangeKeysObj { evens: number, odds: number }
 
 export function changeKeysToUpper(obj: IChangeKeysObj) {
   return Object.keys(obj).reduce<Partial<IChangeKeysObj>>((acc, current) => {

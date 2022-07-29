@@ -19,3 +19,5 @@ interface JSONObject {
 }
 
 interface JSONArray extends Array<JSONValue> { }
+
+export interface IChangeKeysObj { evens: number, odds: number }
