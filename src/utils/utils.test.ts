@@ -164,7 +164,7 @@ describe('unit tests', () => {
       four: 4,
       five: 5,
     }
-
+    
     const actual = cleanNullValues(objToClean)
     expect(actual).toEqual(expected)
   })

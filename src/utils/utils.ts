@@ -52,6 +52,9 @@ export function changeKeysToUpper(obj: { evens: number, odds: number }) {
   }, {})
 }
 
-export function cleanNullValues(ob: {}) {
-  return null
+export function cleanNullValues(obj: {}) {
+  Object.keys(obj).forEach(key => {
+    if(obj[key] === null) delete obj[key] 
+  })
+  return obj
 }
