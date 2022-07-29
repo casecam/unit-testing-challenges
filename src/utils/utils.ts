@@ -1,3 +1,4 @@
+import { keyboard } from '@testing-library/user-event/dist/keyboard';
 import { getRandomItems } from '../data/data'
 import { Item } from '../data/types'
 
@@ -45,5 +46,9 @@ export function tallyEvensAndOdds(arr: number[]) {
 }
 
 export function changeKeysToUpper(obj: {}) {
-  return {}
+  return Object.keys(obj).reduce((acc, current) => {
+    acc[current.toUpperCase()] = obj[current]
+    return acc
+  }, {})
 }
+
