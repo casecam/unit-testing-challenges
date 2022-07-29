@@ -1,4 +1,4 @@
-import { getIfInStock, getTotalPrice, matchObjectAndString, renameObjKeys } from "./utils"
+import { getIfInStock, getTotalPrice, matchObjectAndString, multiplyNumbersInArray, renameObjKeys } from "./utils"
 import { dummyArray, MOCK_RM_CHARACTERS, MOCK_SWAPI_CHARACTERS } from "../data/data"
 import { fetchCharacters, fetchSwapi } from "./api-utils"
 import mockAxios from 'axios'
@@ -108,8 +108,7 @@ describe('unit tests', () => {
   })
   
   // test 6
-
-  it('Hits the SWAPI API using axios and returns results', async () => {
+  it.skip('Hits the SWAPI API using axios and returns results', async () => {
     const results = await fetchSwapi()
     console.log(results);
     
@@ -117,5 +116,12 @@ describe('unit tests', () => {
     expect(mockAxios).toHaveBeenCalledTimes(1)
     expect(results).toHaveLength(20)
     expect(results).toEqual(expect.arrayContaining(MOCK_SWAPI_CHARACTERS.results))
+  })
+
+  // test 7
+  it('multiplies values in array by four and returns the sum', () => {
+    const expected = 24
+    const actual = multiplyNumbersInArray([2,4])
+    expect(expected).toEqual(actual)
   })
 })

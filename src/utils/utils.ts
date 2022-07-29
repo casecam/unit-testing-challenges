@@ -31,3 +31,7 @@ export function renameObjKeys(count: number) {
 export function getIfInStock(arr: Item[]) {
   return arr.filter(({ inStock }) => inStock === true)
 }
+
+export function multiplyNumbersInArray(arr: number[]) {
+    return arr.reduce((acc, current) => current * 3 + acc, 0)
+}
