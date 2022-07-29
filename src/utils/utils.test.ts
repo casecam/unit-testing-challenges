@@ -1,4 +1,10 @@
-import { getIfInStock, getTotalPrice, matchObjectAndString, multiplyNumbersInArray, renameObjKeys } from "./utils"
+import { 
+  getIfInStock,
+  getTotalPrice,
+  matchObjectAndString,
+  multiplyNumbersInArray,
+  renameObjKeys,
+  tallyEvensAndOdds } from "./utils"
 import { dummyArray, MOCK_RM_CHARACTERS, MOCK_SWAPI_CHARACTERS } from "../data/data"
 import { fetchCharacters, fetchSwapi } from "./api-utils"
 import mockAxios from 'axios'
@@ -127,8 +133,9 @@ describe('unit tests', () => {
 
   // test 8
   it('tallies up the odd and even numbers in an array', () => {
-    const expected = [2,1]
-    const actual = tallyEvensAndOdds([])
-    expect(actual).toEqual(expect.arrayContaining(expected))
+    const evensAndOdds = [2, 3, 4]
+    const expected = { evens: 2, odds: 1 }
+    const actual = tallyEvensAndOdds(evensAndOdds)
+    expect(actual).toEqual(expected)
   })
 })

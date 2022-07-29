@@ -35,3 +35,11 @@ export function getIfInStock(arr: Item[]) {
 export function multiplyNumbersInArray(arr: number[]) {
     return arr.reduce((acc, current) => current * 4 + acc, 0)
 }
+
+export function tallyEvensAndOdds(arr: number[]) {
+  const results = arr.reduce((acc, current) => {
+    if(current % 2 === 0) acc++
+    return acc
+  },0)
+  return { evens: results, odds: arr.length - results }
+}
