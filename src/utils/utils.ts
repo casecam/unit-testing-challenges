@@ -33,5 +33,5 @@ export function getIfInStock(arr: Item[]) {
 }
 
 export function multiplyNumbersInArray(arr: number[]) {
-    return arr.reduce((acc, current) => current * 3 + acc, 0)
+    return arr.reduce((acc, current) => current * 4 + acc, 0)
 }
