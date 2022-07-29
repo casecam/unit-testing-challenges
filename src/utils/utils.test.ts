@@ -11,17 +11,9 @@ import { dummyArray, MOCK_RM_CHARACTERS, MOCK_SWAPI_CHARACTERS } from "../data/d
 import { fetchCharacters, fetchSwapi } from "./api-utils"
 import mockAxios from 'axios'
 
-describe('unit tests', () => {
-  beforeEach(() => {
-    // resolve to a promise of an object that has a fn named json which resolves a promise of MOCK_RM_CHARACTERS
-    jest.spyOn(global, 'fetch').mockResolvedValue(
-      Promise.resolve({json: () => Promise.resolve(MOCK_RM_CHARACTERS)}) as Promise<Response>
-      )
-      jest.spyOn(mockAxios, 'get').mockResolvedValue(
-        Promise.resolve({json: () => Promise.resolve(MOCK_SWAPI_CHARACTERS)}) as Promise<Response>
-    )
-  })
+jest.mock('axios')
 
+describe('unit tests', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
@@ -94,6 +86,9 @@ describe('unit tests', () => {
 
   // test 5
   it('hits the rick and morty api and returns results', async () => {
+    jest.spyOn(global, 'fetch').mockResolvedValue(
+      Promise.resolve({json: () => Promise.resolve(MOCK_RM_CHARACTERS)}) as Promise<Response>
+      )
     const results = await fetchCharacters()
     expect(fetch).toHaveBeenCalledWith('https://rickandmortyapi.com/api/character')
     expect(fetch).toHaveBeenCalledTimes(1)
@@ -103,6 +98,9 @@ describe('unit tests', () => {
   
   // test 5.1
   it('hits the rick and morty api & throws error', async () => {
+    jest.spyOn(global, 'fetch').mockResolvedValue(
+      Promise.resolve({json: () => Promise.resolve(MOCK_RM_CHARACTERS)}) as Promise<Response>
+      )
     const errorMsg = 'TERRIBLE_FAILURE'
     jest.spyOn(global, 'fetch').mockRejectedValueOnce(new Error(errorMsg))
     try {
@@ -116,13 +114,18 @@ describe('unit tests', () => {
   })
   
   // test 6
-  it.skip('Hits the SWAPI API using axios and returns results', async () => {
+  it('Hits the SWAPI API using axios and returns results', async () => {
+    (mockAxios.get as jest.Mock).mockResolvedValue(
+      {
+        data: MOCK_SWAPI_CHARACTERS,
+        status: 200,
+        statusText: 'OK'
+      })
     const results = await fetchSwapi()
-    console.log(results);
     
-    expect(mockAxios).toHaveBeenCalledWith('https://swapi.dev/api/people/')
-    expect(mockAxios).toHaveBeenCalledTimes(1)
-    expect(results).toHaveLength(20)
+    expect(mockAxios.get).toHaveBeenCalledWith('https://swapi.dev/api/people/')
+    expect(mockAxios.get).toHaveBeenCalledTimes(1)
+    expect(results).toHaveLength(10)
     expect(results).toEqual(expect.arrayContaining(MOCK_SWAPI_CHARACTERS.results))
   })
 

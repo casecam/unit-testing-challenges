@@ -1,6 +1,5 @@
 import axios from "axios"
-import { resourceLimits } from "worker_threads";
-import { JSONValue } from '../data/types'
+import { JSONValue, SWAPIResponse } from '../data/types'
 
 export async function fetchCharacters() {
   try {
@@ -15,8 +14,8 @@ export async function fetchCharacters() {
 
 export async function fetchSwapi() {
   try {
-    const results = await axios.get<JSONValue>('https://swapi.dev/api/people/')
-    return await results.json()
+    const results = await axios.get('https://swapi.dev/api/people/')
+    return results.data.results as SWAPIResponse
   } catch (error) {
     throw error
   }
