@@ -1,5 +1,6 @@
 import { 
   changeKeysToUpper,
+  cleanNullValues,
   getIfInStock,
   getTotalPrice,
   matchObjectAndString,
@@ -145,6 +146,26 @@ describe('unit tests', () => {
     const keysToChange = { evens: 2, odds: 1 }
     const expected = { EVENS: 2, ODDS: 1 }
     const actual = changeKeysToUpper(keysToChange)
+    expect(actual).toEqual(expected)
+  })
+
+  // test 10
+  it('removes null values from an object', () => {
+    const objToClean = {
+      one: null,
+      two: 2,
+      three: null,
+      four: 4,
+      five: 5,
+    }
+
+    const expected = {
+      two: 2,
+      four: 4,
+      five: 5,
+    }
+
+    const actual = cleanNullValues(objToClean)
     expect(actual).toEqual(expected)
   })
 })

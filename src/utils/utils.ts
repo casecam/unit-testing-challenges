@@ -45,10 +45,13 @@ export function tallyEvensAndOdds(arr: number[]) {
   return { evens: results, odds: arr.length - results }
 }
 
-export function changeKeysToUpper(obj: {}) {
+export function changeKeysToUpper(obj: { evens: number, odds: number }) {
   return Object.keys(obj).reduce((acc, current) => {
-    acc[current.toUpperCase()] = obj[current]
+    acc[current.toUpperCase()] = obj[current] 
     return acc
   }, {})
 }
 
+export function cleanNullValues(ob: {}) {
+  return null
+}
