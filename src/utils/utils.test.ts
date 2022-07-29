@@ -1,4 +1,5 @@
 import { 
+  changeKeysToUpper,
   getIfInStock,
   getTotalPrice,
   matchObjectAndString,
@@ -136,6 +137,14 @@ describe('unit tests', () => {
     const evensAndOdds = [2, 3, 4]
     const expected = { evens: 2, odds: 1 }
     const actual = tallyEvensAndOdds(evensAndOdds)
+    expect(actual).toEqual(expected)
+  })
+
+  // test 9
+  it('loops through an object and changes property name to uppercase', () => {
+    const keysToChange = { evens: 2, odds: 1 }
+    const expected = { EVENS: 2, ODDS: 1 }
+    const actual = changeKeysToUpper(keysToChange)
     expect(actual).toEqual(expected)
   })
 })

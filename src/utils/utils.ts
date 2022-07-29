@@ -43,3 +43,7 @@ export function tallyEvensAndOdds(arr: number[]) {
   },0)
   return { evens: results, odds: arr.length - results }
 }
+
+export function changeKeysToUpper(obj: {}) {
+  return {}
+}
