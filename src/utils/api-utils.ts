@@ -1,12 +1,11 @@
 import axios from "axios"
-import { JSONValue, SWAPIResponse } from '../data/types'
+import { RickAndMortyRespose, SWAPIResponse } from '../data/types'
 
 export async function fetchCharacters() {
   try {
     const result = await fetch('https://rickandmortyapi.com/api/character')
     const data = await result.json()
-    // make interface for data.results
-    return data.results
+    return data.results as RickAndMortyRespose
   } catch (error) {   
     throw error
   }
@@ -19,5 +18,4 @@ export async function fetchSwapi() {
   } catch (error) {
     throw error
   }
-
 }
