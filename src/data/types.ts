@@ -33,17 +33,4 @@ export interface SWAPIResponseObject {
     "url": string,
 }
 
-export type JSONValue =
-| string
-| number
-| boolean
-| JSONObject
-| JSONArray
-
-interface JSONObject {
-[x: string]: JSONValue;
-}
-
-interface JSONArray extends Array<JSONValue> { }
-
 export interface IChangeKeysObj { evens: number, odds: number }
